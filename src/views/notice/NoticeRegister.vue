@@ -33,7 +33,7 @@
     <div class="bottomBtns">
       <el-button type="primary" @click="onSubmit" v-if="!noticeId">등록</el-button>
       <el-button type="primary" v-else @click="onModify">수정</el-button>
-      <el-button type="primary">취소</el-button>
+      <el-button type="primary" @click="$router.push('/noticeList')">취소</el-button>
     </div>
   </section>
 </template>
@@ -128,7 +128,7 @@
           form: this.form
           //param도 보내고 form데이터도 보냄
         })
-        .then(res => {
+        .then(res => { 
           console.log(res)
 
           this.$router.push({ path:'/noticeDetail', query: { noticeId: res.data.noticeId}})

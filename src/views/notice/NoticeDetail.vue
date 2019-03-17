@@ -15,9 +15,9 @@
       </el-form-item>
     </el-form>
     <div class="bottomBtns">
-      <el-button type="primary" @click="$router.push('/')">목록</el-button>
+      <el-button type="primary" @click="$router.push('/noticeList')">목록</el-button>
       <el-button type="primary" @click="$router.push({path:'/noticeRegister', query: {noticeId}})">수정</el-button>
-      <el-button type="primary">삭제</el-button>
+      <el-button type="primary" @click="onDelete">삭제</el-button>
     </div>
   </section>
 </template>
@@ -56,6 +56,25 @@
       .finally(_ => {
 
       })
+    },
+    methods: {
+     onDelete() {
+       axios.delete(`http://localhost:3000/notice/${this.noticeId}`, {
+          // form: this.form
+        })
+        .then(res => { //성공했다면
+          //console.log(res) ???내려줄게없는데요
+          this.$router.push('/noticeList')
+          //this.$router.push({ path:'/noticeDetail', query: { noticeId: res.data.noticeId}})
+          console.log('삭제 성공!!!!!')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(_ => {
+
+        })
+     }
     }
   }
 </script>
