@@ -31,8 +31,8 @@
       <span>total = {{countTotal}}</span>
     </ul>
     <div class="bottomBtns">
-      <el-button type="primary" @click="onSubmit">등록</el-button>
-      <el-button type="primary">수정</el-button>
+      <el-button type="primary" @click="onSubmit" v-if="!noticeId">등록</el-button>
+      <el-button type="primary" v-else @click="onModify">수정</el-button>
       <el-button type="primary">취소</el-button>
     </div>
   </section>
@@ -68,8 +68,38 @@
           { id:3, count:5, name:'black' },
           { id:4, count:0, name:'white' },
           { id:5, count:6, name:'pink' }
-        ]
+        ],
+        noticeId: this.$route.query.noticeId
       }
+    },
+    created() {
+      //console.log('noticeId = ', this.$route.query.noticeId)
+
+      if(this.noticeId){ //created 로직을 무조건 타기때문에 분기처리
+        axios.get(`http://localhost:3000/notice/${this.noticeId}`) //params방식임. notice뒤에 ?를 붙이게되면 쿼리스트링.
+        .then(res => {
+          console.log(res)
+
+          this.form = res.data.form //서버에서 가져온 데이터 넣어주기
+
+          this.form.dpTp = res.data.form.tp
+
+          //string을 배열로 바꿔주기
+          console.log('split = ' + res.data.form.init.split(','))
+
+          this.form.init = res.data.form.init.split(',')
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(_ => {
+
+        })
+
+      }//end if
+
+      
     },
     methods: { 
       onSubmit() {
@@ -77,16 +107,37 @@
         console.log(this.form)
         axios({ //post 형식으로 url에 data를 보냄
           method: 'POST',
-          url: 'http://localhost:3000/notice/register',
+          url: 'http://localhost:3000/notice',
           data: { form: this.form }
         })
         .then(res => { //성공
+            console.log(res)
 
+            this.$router.push({ path:'/noticeDetail', query: { noticeId: res.data.noticeId}})//서버에서 내려준 값, 쿼리스트링 방식
+            //this.$router.push({ name:'NoticeDetail', params: {noticeId: res.data.noticeId}})//params방식
         })
         .catch(err => { //실패
 
         })
         .finally(_ => { //상관없이 무조건 실행
+
+        })
+      },
+      onModify() {
+        axios.put(`http://localhost:3000/notice/${this.noticeId}`, {
+          form: this.form
+          //param도 보내고 form데이터도 보냄
+        })
+        .then(res => {
+          console.log(res)
+
+          this.$router.push({ path:'/noticeDetail', query: { noticeId: res.data.noticeId}})
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(_ => {
 
         })
       }
