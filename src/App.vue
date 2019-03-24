@@ -1,29 +1,12 @@
 <template>
   <div id="app">
-    <div class="app-wrapper">
-      <Sidebar class="sidebar-container"/>
-      <div class="main-container">
-        <Navbar />
-        <section class="app-main">
-          <transition name="fade-transform" mode="out-in">
-            <router-view/>
-          </transition>
-        </section>
-      </div>
-    </div>
+    <router-view /> <!--라우터에 등록된 컴포넌츠만 보이게--> 
   </div>
 </template>
 <script>
 
-import Navbar from '@/components/Navbar.vue'
-import Sidebar from '@/components/Sidebar.vue'
-
 export default {
-  name: 'App',
-  components: {
-    Navbar,
-    Sidebar
-  }
+  name: 'App'
 }
 </script>
 

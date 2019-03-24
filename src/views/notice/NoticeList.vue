@@ -12,30 +12,54 @@
       <el-table-column prop="createdAt" align="center" label="등록일" width="220">
       </el-table-column>
     </el-table>
+
+    <el-pagination layout="prev, pager, next" 
+      :page-size="pageSize" 
+      :total="total"
+      :current-page.sync="currentPage" 
+      @current-change="onPageChange"> 
+    </el-pagination>
     
     <div class="bottomBtns">
-      <el-button type="primary" @click="$router.push('/noticeRegister')">공지사항 등록</el-button>
+      <el-button type="primary" @click="$router.push('/notice/register')">공지사항 등록</el-button>
     </div>
   </section>
 </template>
 
 <script>
   import axios from 'axios'
+  import Cookies from 'js-cookie'
   export default {
    data() {
      return {
-       noticeData: []
+       noticeData: [],
+       total:1,
+       pageSize: 10,
+       currentPage: 1
      }
    },
    created() {
-
-     axios.get('http://localhost:3000/notice')
+    this.onList()
+   },
+   methods: {
+     onList(){ //기존 created 부분 메소드로 사용하기!! 페이징에서도 또 사용해야하니까 
+       axios.get('http://localhost:3000/notice')
       .then(res => {
         console.log('========res=========')
         console.log(res)
         console.log('========res=========')
 
-        this.noticeData = res.data.noticeData
+        //this.noticeData = res.data.noticeData 통째로 바인딩하였는데 이제 잘라서 넣어야함 
+
+        //데이터 가공
+        const notiData = res.data.noticeData
+        this.total = notiData.length
+
+        let currentMaxLow = this.currentPage * this.pageSize
+        let currentMinLow = currentMaxLow - this.pageSize
+        console.log(currentMaxLow, currentMinLow)
+
+        this.noticeData = notiData.slice(currentMinLow, currentMaxLow)//실제로 0~9까지 자름 
       })
       .catch(err => {
         console.log(err)
@@ -43,12 +67,32 @@
       .finally(_ => {
 
       })
-   },
-   methods: {
+     },
      onDetail(scope) {
        console.log(scope)
-       this.$router.push({ path: '/noticeDetail', query: {noticeId:scope.row.id}})
+       this.$router.push({ path: '/notice/detail', query: {noticeId:scope.row.id}})
+     },
+     onPageChange(pageNo) {
+       this.onList()
      }
-   }
+   },
+   /*beforeRouteEnter (to, from, next) {
+     console.log(to)
+      console.log(from)
+
+      if (Cookies.get('token')){
+        if(to.path === '/login') {
+          next({ path: `/`})
+        } else{
+          next()
+        }
+      } else {
+        if (to.path !== '/login') {
+          next({path:'/login'})
+        }else{
+          next()
+        }
+      }
+   }*/
   }
 </script>

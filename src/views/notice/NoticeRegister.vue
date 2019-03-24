@@ -33,7 +33,7 @@
     <div class="bottomBtns">
       <el-button type="primary" @click="onSubmit" v-if="!noticeId">등록</el-button>
       <el-button type="primary" v-else @click="onModify">수정</el-button>
-      <el-button type="primary" @click="$router.push('/noticeList')">취소</el-button>
+      <el-button type="primary" @click="$router.push('/notice/list')">취소</el-button>
     </div>
   </section>
 </template>
@@ -113,7 +113,7 @@
         .then(res => { //성공
             console.log(res)
 
-            this.$router.push({ path:'/noticeDetail', query: { noticeId: res.data.noticeId}})//서버에서 내려준 값, 쿼리스트링 방식
+            this.$router.push({ path:'/notice/detail', query: { noticeId: res.data.noticeId}})//서버에서 내려준 값, 쿼리스트링 방식
             //this.$router.push({ name:'NoticeDetail', params: {noticeId: res.data.noticeId}})//params방식
         })
         .catch(err => { //실패
@@ -131,7 +131,7 @@
         .then(res => { 
           console.log(res)
 
-          this.$router.push({ path:'/noticeDetail', query: { noticeId: res.data.noticeId}})
+          this.$router.push({ path:'/notice/detail', query: { noticeId: res.data.noticeId}})
 
         })
         .catch(err => {
