@@ -1,9 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex' //전역으로 상태관리
+//import Vue from 'vue'
+//import Vuex from 'vuex' //전역으로 상태관리
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { userLogin } from '@/api/app.js'
 
-Vue.use(Vuex)
+//Vue.use(Vuex)
 
 const user = {
    state: { //최종 상태값
@@ -24,9 +25,10 @@ const user = {
       // 비동기 로직 즉 통신
 
       Login({ commit }, userInfo) { //commit 생략가능. 옵션임. 
-         axios.post('http://localhost:3000/login', {
-            data: userInfo
-         })
+        // axios.post('http://localhost:3000/login', {
+        //    data: userInfo
+        // })
+        userLogin({userInfo})
          .then(res => {
             console.log('============= res =========')
             console.log(res)
@@ -48,8 +50,10 @@ const user = {
    }
 }
 
-export default new Vuex.Store({
-   modules: { //모듈화 구조! 
-      user
-   }
-})
+export default user
+
+//export default new Vuex.Store({
+//   modules: { //모듈화 구조! 
+//      user
+//   }
+//})

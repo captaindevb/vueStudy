@@ -78,6 +78,24 @@ const routes = [
     ]
   },
   {
+    path: '/popup',
+    component: Layout,
+    children: [{
+      path:'register',
+      name:'PopupRegister',
+      component: () => import('@/views/popup/PopupRegister')
+    }]
+  },
+  {
+    path: '/',
+    component: Layout,
+    children: [{
+      path:'registration',
+      name:'Registration',
+      component: () => import('@/views/registration/Registration')
+    }]
+  },
+  {
     path: '*',
     component: NotFound
   }

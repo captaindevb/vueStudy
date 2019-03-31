@@ -8,7 +8,8 @@ import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
 
-import store from './store/users'
+//import store from './store/users'
+import store from '@/store'
 import Cookies from 'js-cookie'
 
 Vue.use(ElementUI, { locale })
