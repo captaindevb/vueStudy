@@ -7,9 +7,9 @@
           <span class="link" @click="onDetail(scope)">{{scope.row.subj}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="tp" align="center" label="구분" width="150">
+      <el-table-column prop="tp" align="center" label="구분" width="130">
       </el-table-column>
-      <el-table-column prop="createdAt" align="center" label="등록일" width="220">
+      <el-table-column prop="createdAt" align="center" label="등록일" width="150">
       </el-table-column>
     </el-table>
 
@@ -53,6 +53,11 @@
 
         //데이터 가공
         const notiData = res.data.noticeData
+        notiData.reverse() //배열 거꾸로 정렬
+        console.log(notiData[1].createdAt);
+        notiData.forEach(function (item, index, array) {
+          array[index].createdAt = item.createdAt.substring(0, 10); // 날짜 예쁘게 자르기
+        })
         this.total = notiData.length
 
         let currentMaxLow = this.currentPage * this.pageSize
@@ -60,6 +65,8 @@
         console.log(currentMaxLow, currentMinLow)
 
         this.noticeData = notiData.slice(currentMinLow, currentMaxLow)//실제로 0~9까지 자름 
+        
+
       })
       .catch(err => {
         console.log(err)

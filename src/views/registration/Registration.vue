@@ -44,6 +44,7 @@ PC : 회원가입
 </template>
 
 <script>
+import { registration } from '@/api/app.js'
 export default {
 	data () {
         const validatePass2 = (rule, value, callback) => {
@@ -65,7 +66,7 @@ export default {
 				password: '',
 				password2: '',
 				terms: []
-			},
+            },
             rule: {
                 usermail: [
                     { required: true, message: '이메일 주소를 입력하세요.', trigger: 'blur' },
@@ -92,6 +93,21 @@ export default {
 			this.$refs['form'].validate((valid) => {
 				if(valid){
 					console.log('벨류데이션 통과')
+
+                    this.registration = true
+                    
+                    registration( {form: this.form} )
+                        .then( res => {
+                            console.log('=== res ===')
+                            console.log(res)
+                            console.log('=== res ===')
+
+                            this.$alert(`${res.data.body}님 가입을 축하드립니다.`)
+
+                            this.$router.push('/')
+                        })
+                        .catch(err => console.log(err))
+                        .finally(_ => this.registration = false)
 				}else {
 					console.log('벨류데이션 미통과')
 				}

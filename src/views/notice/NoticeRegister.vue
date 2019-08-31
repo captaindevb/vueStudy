@@ -1,6 +1,6 @@
 <template>
   <section class="detail">
-  {{form}}
+    <!--{{form}}-->
     <el-form ref="form" label-width="150px" :model="form">
       <el-form-item label="제목">
         <el-input v-model="form.subj"></el-input>
@@ -22,14 +22,15 @@
         <vue-editor id="editor" v-model="form.conts"></vue-editor>
       </el-form-item>
     </el-form>
-    <ul><!--key값은 고유값 뷰매커니즘. 중복X-->
+    <!--key값은 고유값 뷰매커니즘. 중복X-->
+    <!--<ul>
       <li v-for="(item, index) in bodyData" :key="index">
         color: {{item.name}}, count: {{item.count}} <button @click="item.count++">수량추가</button>
         <span v-if="item.count === 0">Sold out</span>
         <span v-else>In stock</span>
       </li>
       <span>total = {{countTotal}}</span>
-    </ul>
+    </ul>-->
     <div class="bottomBtns">
       <el-button type="primary" @click="onSubmit" v-if="!noticeId">등록</el-button>
       <el-button type="primary" v-else @click="onModify">수정</el-button>

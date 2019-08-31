@@ -34,9 +34,12 @@ const user = {
             console.log(res)
             console.log('============= res =========')
 
-            commit('SET_ID', res.data.body.email)
+            //commit('SET_ID', res.data.body.email)
 
-            Cookies.set('token', res.data.body.email, {expires:1}) // key, values, 유효시간(하루)
+            commit('SET_ID', res.data.body) //body자체가 즉 email이 됨 
+
+            //Cookies.set('token', res.data.body.email, {expires:1}) // key, values, 유효시간(하루)
+            Cookies.set('token', res.data.body, {expires:1})
 
          })
          .catch(err => {
