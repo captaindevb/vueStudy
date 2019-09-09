@@ -12,7 +12,7 @@ import Cookies from 'js-cookie'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', component: () => import('@/views/login')},
+  { path: '/login', component: () => import('@/views/login')}, // login 페이지는 login 폴더 안에 index.vue로 존재
   {
     path: '/',
     name: 'HelloWorld',
@@ -84,10 +84,16 @@ const routes = [
       path:'register',
       name:'PopupRegister',
       component: () => import('@/views/popup/PopupRegister')
-    }]
+    },
+    {
+      path:'list',
+      name:'PopupList',
+      component: () => import('@/views/popup/PopupList')
+    }
+  ]
   },
   {
-    path: '/',
+    path: '/', // registration은 폴더 안에 index가 아니라 자식처럼 Registration.vue 페이지가 있기때문 
     component: Layout,
     children: [{
       path:'registration',
