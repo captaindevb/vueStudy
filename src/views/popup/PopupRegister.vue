@@ -6,7 +6,7 @@
         <el-input v-model="form.subj"></el-input>
       </el-form-item>
 
-      <el-form-item label="파업구분">
+      <el-form-item label="팝업구분">
           <el-select v-model="form.tp">
             <el-option
               v-for="item in tpOptions"
@@ -152,7 +152,7 @@
       // 이미지 변환
       onImgChange(file, fileList) {
         console.log(file)
-        //this.fileUrl = file.url
+        this.fileUrl = file.url
 
         let fileName = file.name
         let lastDot = fileName.lastIndexOf('.')

@@ -10,7 +10,7 @@
     >
       <el-menu-item index="0" @click="$router.push('/')">HOME</el-menu-item>
       <el-menu-item index="1"><router-link to='/notice/list'>NOTICE</router-link></el-menu-item>
-      <el-menu-item index="2"><router-link to='/popup/register'>POPUP</router-link></el-menu-item>
+      <el-menu-item index="2"><router-link to='/popup/list'>POPUP</router-link></el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>
