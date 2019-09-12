@@ -88,7 +88,30 @@ const routes = [
     {
       path:'list',
       name:'PopupList',
-      component: () => import('@/views/popup/PopupList')
+      component: () => import('@/views/popup/PopupList'),
+      beforeEnter: (to, from, next) => { 
+        console.log(to)
+        console.log(from)
+
+        if (Cookies.get('token')){
+          if(to.path === '/login') {
+            next({ path: `/`})
+          } else{
+            next()
+          }
+        } else {
+          if (to.path !== '/login') {
+            next({path:'/login'})
+          }else{
+            next()
+          }
+        }
+      }
+    },
+    {
+      path:'detail',
+      name:'PopupDetail',
+      component: () => import('@/views/popup/PopupDetail')
     }
   ]
   },

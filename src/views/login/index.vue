@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-      <h3 class="title">관리자 로그인</h3>
+      <h3 class="title">로그인</h3>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -19,9 +19,9 @@
           auto-complete="on"
           placeholder="비밀번호를 입력해주세요"
           @keyup.enter.native="handleLogin" />
-        <span class="show-pwd" @click="showPwd">xx
+        <!--<span class="show-pwd" @click="showPwd">xx
           <svg-icon icon-class="password" />
-        </span>
+        </span>-->
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
@@ -29,20 +29,20 @@
         </el-button>
       </el-form-item>
       <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click="$router.push('/')">
-          비회원
-        </el-button>
-      </el-form-item>
-      <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;"  @click="$router.push('/registration')">
           회원가입
         </el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button :loading="loading" type="primary" style="width:100%;" @click="$router.push('/')">
+          돌아가기
+        </el-button>
+      </el-form-item>
       <span v-show="userId">{{changeId}}</span>
-      <div class="tips">
+      <!--<div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: admin</span>
-      </div>
+      </div>-->
     </el-form>
   </div>
 </template>
@@ -187,6 +187,10 @@ $light_gray:#eee;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
+  }
+  .el-form-item__error{
+    padding-top:0;
+    margin-top:-6px;
   }
 }
 

@@ -36,7 +36,7 @@
       <el-button type="primary" v-else @click="onModify">수정</el-button>
       <el-button type="primary" @click="$router.push('/notice/list')">취소</el-button>
     </div>
-  </section>
+  </section> 
 </template>
 <script>
   import { VueEditor } from 'vue2-editor'

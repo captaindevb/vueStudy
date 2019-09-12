@@ -93,7 +93,6 @@ export default {
   padding:15px;
   margin:0;
   margin-right:0 !important;
-  padding-right:0;
 }
 .el-table.el-table--border {
   border:0;

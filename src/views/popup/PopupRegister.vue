@@ -54,9 +54,9 @@
     </el-form>
 
     <div class="bottomBtns">
-      <el-button v-if="!modifyYn" type="primary" @click="onSubmit('form')">등록</el-button>
-      <el-button v-if="modifyYn" type="primary" @click="onUpdate('form')">수정</el-button>
-      <el-button type="primary" @click="onCancel">취소</el-button>
+      <el-button v-if="!popupId" type="primary" @click="onSubmit('form')">등록</el-button>
+      <el-button v-if="popupId" type="primary" @click="onModify('form')">수정</el-button>
+      <el-button type="primary" @click="$router.push('/popup/list')">취소</el-button>
       <el-button type="primary" @click="SET_MODAL(true)">미리보기</el-button>
     </div>
 
@@ -108,15 +108,39 @@
           value: '30',
           label: '이벤트'
         }],
-        classChk: false
+        classChk: false,
+        popupId: this.$route.query.popupId
       }
     },
-    
+    created(fileList) {
+      if(this.popupId){ //created 로직을 무조건 타기때문에 분기처리
+        axios.get(`http://localhost:3000/popup/${this.popupId}`)
+        .then(res => {
+          console.log("데이터가 들어왔는지 확인해봅시다", res)
+
+          this.form = res.data.form //서버에서 가져온 데이터 넣어주기
+
+          this.fileList = [
+            {name: this.form.originalname, url: 'http://localhost:3000/images/' + this.form.filename} 
+          ]
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(_ => {
+
+        })
+
+      }//end if
+
+      
+    },
     methods: {
       ...mapMutations([
          'SET_MODAL'
       ]),
-   
+      
       onSubmit() {
        const formData = new FormData()
 
@@ -129,19 +153,31 @@
           console.log('=======res=====')
           console.log(res.data)
           console.log('=======res=====')
+           this.$router.push({ path:'/popup/detail', query: { popupId: res.data.popupId}})
         })
         .catch(err => console.log(err))
 
       },
     
       // 글 수정
-      onUpdate() {
-        
-      },
+      onModify() {
+        console.log("메소드 진입")
+        const formData = new FormData()
+        formData.append('form', JSON.stringify(this.form)) 
+        if (this.imgFile) formData.append('image', this.imgFile.raw)
+        axios.put(`http://localhost:3000/popup/${this.popupId}`, formData)
+        .then(res => { 
+          console.log("수정 성공적 수행",res)
 
-      // 글 등록 취소
-      onCancel() {
-        
+          this.$router.push({ path:'/popup/detail', query: { popupId: res.data.popupId}})
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(_ => {
+
+        })
       },
 
       // 이미지 삭제

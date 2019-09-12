@@ -4,7 +4,7 @@
       <el-table-column prop="id" label="번호" width="80" align="center"></el-table-column>
       <el-table-column prop="filename" label="이미지" width="400" align="center">
         <template slot-scope="scope">
-           <img class="popupImg" alt="" :src="scope.row.filename" style="width:100%;"/>
+           <img class="popupImg" alt="" :src="scope.row.filename" style="width:100%;max-height:220px;"/>
         </template>
       </el-table-column>
       <el-table-column prop="subj" label="제목" header-align="center">
@@ -84,10 +84,11 @@
       })
      },
      onDetail(scope) {
-      
+      console.log(scope)
+       this.$router.push({ path: '/popup/detail', query: {popupId:scope.row.id}})
      },
      onPageChange(pageNo) {
-       
+       this.onList()
      }
    }
   }
