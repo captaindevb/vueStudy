@@ -43,7 +43,7 @@
    },
    methods: {
      onList(){ //기존 created 부분 메소드로 사용하기!! 페이징에서도 또 사용해야하니까 
-       axios.get('http://localhost:3000/notice')
+       axios.get('http://15.164.101.68:3000/notice')
       .then(res => {
         console.log('========res=========')
         console.log(res)

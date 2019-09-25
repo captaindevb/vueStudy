@@ -77,7 +77,7 @@
       //console.log('noticeId = ', this.$route.query.noticeId)
 
       if(this.noticeId){ //created 로직을 무조건 타기때문에 분기처리
-        axios.get(`http://localhost:3000/notice/${this.noticeId}`) //params방식임. notice뒤에 ?를 붙이게되면 쿼리스트링.
+        axios.get(`http://15.164.101.68:3000/notice/${this.noticeId}`) //params방식임. notice뒤에 ?를 붙이게되면 쿼리스트링.
         .then(res => {
           console.log(res)
 
@@ -108,16 +108,17 @@
         console.log(this.form)
         axios({ //post 형식으로 url에 data를 보냄
           method: 'POST',
-          url: 'http://localhost:3000/notice',
+          url: 'http://15.164.101.68:3000/notice',
           data: { form: this.form }
         })
         .then(res => { //성공
-            console.log(res)
-
+            console.log("레스가 안뜬다고??? =====",res.data)
+            console.log("노티스아이디값은??",res.data.noticeId)
             this.$router.push({ path:'/notice/detail', query: { noticeId: res.data.noticeId}})//서버에서 내려준 값, 쿼리스트링 방식
             //this.$router.push({ name:'NoticeDetail', params: {noticeId: res.data.noticeId}})//params방식
         })
         .catch(err => { //실패
+          console.log("실패", err)
 
         })
         .finally(_ => { //상관없이 무조건 실행
@@ -125,7 +126,7 @@
         })
       },
       onModify() {
-        axios.put(`http://localhost:3000/notice/${this.noticeId}`, {
+        axios.put(`http://15.164.101.68:3000/notice/${this.noticeId}`, {
           form: this.form
           //param도 보내고 form데이터도 보냄
         })

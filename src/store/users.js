@@ -25,7 +25,7 @@ const user = {
       // 비동기 로직 즉 통신
 
       Login({ commit }, userInfo) { //commit 생략가능. 옵션임. 
-        // axios.post('http://localhost:3000/login', {
+        // axios.post('http://15.164.101.68:3000/login', {
         //    data: userInfo
         // })
         userLogin({userInfo})

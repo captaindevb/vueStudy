@@ -42,13 +42,11 @@
     created() {//컴포넌트 그린 후 바로 실행
       console.log('this.$route.query = ', this.$route.query) //쿼리 보낸것 받을 때
       //console.log('this.$route.params = ', this.$route.params)
-
-      axios.get(`http://localhost:3000/notice/${this.noticeId}`) //params방식임. notice뒤에 ?를 붙이게되면 쿼리스트링.
+      console.log("크리에이트 접속");
+      axios.get(`http://15.164.101.68:3000/notice/${this.noticeId}`) //params방식임. notice뒤에 ?를 붙이게되면 쿼리스트링.
       .then(res => {
-        console.log(res)
-
+        console.log("댄 실행 후 레스는 :::: ",res)
         this.form = res.data.form //서버에서 가져온 데이터 넣어주기
-
       })
       .catch(err => {
         console.log(err)
@@ -59,7 +57,7 @@
     },
     methods: {
      onDelete() {
-       axios.delete(`http://localhost:3000/notice/${this.noticeId}`, {
+       axios.delete(`http://15.164.101.68:3000/notice/${this.noticeId}`, {
           // form: this.form
         })
         .then(res => { //성공했다면

@@ -48,7 +48,7 @@
    },
    methods: {
      onList(){ 
-       axios.get('http://localhost:3000/popup')
+       axios.get('http://15.164.101.68:3000/popup')
       .then(res => {
        
         console.log('========res=========')
@@ -62,7 +62,7 @@
         popupData.forEach(function (item, index, array) {
           array[index].createdAt = item.createdAt.substring(0, 10); // 날짜 예쁘게 자르기
         })
-        const imgUrl = "http://localhost:3000/images/";
+        const imgUrl = "http://15.164.101.68:3000/images/";
         popupData.forEach(function (item, index, array) {
           array[index].filename = imgUrl.concat(item.filename);
         })

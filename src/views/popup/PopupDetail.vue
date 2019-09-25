@@ -43,10 +43,10 @@
       console.log('this.$route.query = ', this.$route.query) //쿼리 보낸것 받을 때
       //console.log('this.$route.params = ', this.$route.params)
 
-      axios.get(`http://localhost:3000/popup/${this.popupId}`) //params방식임. popup뒤에 ?를 붙이게되면 쿼리스트링.
+      axios.get(`http://15.164.101.68:3000/popup/${this.popupId}`) //params방식임. popup뒤에 ?를 붙이게되면 쿼리스트링.
       .then(res => {
         console.log(res)
-        const imgUrl = "http://localhost:3000/images/"
+        const imgUrl = "http://15.164.101.68:3000/images/"
         res.data.form.filename = imgUrl.concat(res.data.form.filename)
         this.form = res.data.form //서버에서 가져온 데이터 넣어주기
 
@@ -60,7 +60,7 @@
     },
     methods: {
      onDelete() {
-       axios.delete(`http://localhost:3000/popup/${this.popupId}`, {
+       axios.delete(`http://15.164.101.68:3000/popup/${this.popupId}`, {
           // form: this.form
         })
         .then(res => { //성공했다면
