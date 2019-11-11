@@ -59,11 +59,11 @@
          //데이터 가공
         const popupData = res.data.popupData
         popupData.reverse() //배열 거꾸로 정렬
-        popupData.forEach(function (item, index, array) {
+        popupData.forEach( (item, index, array) => {
           array[index].createdAt = item.createdAt.substring(0, 10); // 날짜 예쁘게 자르기
         })
         const imgUrl = "http://15.164.101.68:3000/images/";
-        popupData.forEach(function (item, index, array) {
+        popupData.forEach( (item, index, array) => {
           array[index].filename = imgUrl.concat(item.filename);
         })
         this.total = popupData.length

@@ -55,7 +55,7 @@
         const notiData = res.data.noticeData
         notiData.reverse() //배열 거꾸로 정렬
         console.log(notiData[1].createdAt);
-        notiData.forEach(function (item, index, array) {
+        notiData.forEach( (item, index, array) => {
           array[index].createdAt = item.createdAt.substring(0, 10); // 날짜 예쁘게 자르기
         })
         this.total = notiData.length
