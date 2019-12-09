@@ -39,10 +39,10 @@
         </el-button>
       </el-form-item>
       <span v-show="userId">{{changeId}}</span>
-      <!--<div class="tips">
+      <div class="tips" style="color:#fff;font-size:14px;">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: admin</span>
-      </div>-->
+      </div>
     </el-form>
   </div>
 </template>

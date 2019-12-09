@@ -38,7 +38,6 @@ PC : 회원가입
 				<el-form-item class="unregistration-btn">
 					<el-button type="primary" @click.native.prevent="registerClicked" :loading="registering">회원가입</el-button>
 				</el-form-item>
-                <span style="color:#fff">admin/admin</span>
 			</el-form>
 		</div>
 	</el-main>
